@@ -102,6 +102,21 @@ app.get("/logs", (req,res) => {
 })
 
 
+///////////////////////////////////
+//Show route (Get => /logs/:id)
+/////////////////////////////////////
+app.get("/logs/:id", (req,res) => {
+    //grab the id params
+    const id = req.params.id 
+
+    Log.findById(id, (err, log) =>{
+        res.render("logs/show.ejs", {log})
+    })
+
+})
+
+
+
 
 //___________________
 //Listener

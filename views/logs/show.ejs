@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %> 
+<body>
+    <%- include("../partials/header.ejs") %>
+
+    <main>
+        <div>
+            <article>
+                <h2>
+                    <%= log.name %> -  <%= log.weight %> 
+                    <h5>
+                        <textarea name="" id="" cols="30" rows="10">
+                            <%= log.noteToSelf %> 
+                        </textarea>
+                    </h5>
+                    <a href="/logs/<%= log._id %>/edit"><button>Edit</button></a>
+                    
+                    <form action="/logs/<%= log._id%>?_method=DELETE"
+                        method="post">
+                    <input type="submit" value = "Delete">
+                    </form>
+                    
+                    
+                </h2><br>
+                
+            </article>
+        </div>
+    </main>
+    
+
+   
+</body>
+</html>

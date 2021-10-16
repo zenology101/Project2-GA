@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("../partials/head.ejs") %> 
+<body>
+    <%- include("../partials/header.ejs") %>
+
+    <main>
+        <div>
+            <% for (log of logs) {%>
+                
+                <article>
+                    <a href="/logs/<%= log._id %> ">
+                    <h2>
+                        <%= log.name %> - <%= log.weight %> 
+                    </h2>
+                    </a>
+                </article>
+
+            <% } %> 
+        </div>
+    </main>
+    
+</body>
+</html>
