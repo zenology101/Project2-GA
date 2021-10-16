@@ -20,10 +20,10 @@ input{
     position: relative;
     text-align: center;
     /* color: rgb(165, 231, 198); */
-    position: absolute;
-    top: 40%;
+    /* position: absolute; */
+    /* top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
   
 header{
