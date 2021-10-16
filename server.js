@@ -1,12 +1,12 @@
-require('dotenv').config()
+require('dotenv').config()//loads env vars
 
 //___________________
 //Dependencies
 //___________________
-const express = require('express');
-const methodOverride = require('method-override');
+const express = require('express');//import express
+const morgan = require("morgan")// import morgan
+const methodOverride = require('method-override');//to use destroy method 
 const mongoose = require ('mongoose');
-const app = express();
 const db = mongoose.connection;
 //___________________
 //Port
@@ -23,17 +23,39 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // Connect to Mongo &
 // Fix Depreciation Warnings from Mongoose
 // May or may not need these depending on your Mongoose version
-mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose.connect(MONGODB_URI , { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true }
 );
 
 // Error / success
-db.on('error', (err) => console.log(err.message + ' is mongodb not running?'));
-db.on('connected', () => console.log('mongodb connected: ', MONGODB_URI));
-db.on('disconnected', () => console.log('mongodb disconnected'));
+mongoose.connection
+.on("open", () => console.log("Connected to Mongo"))
+.on("close", () => console.log("Disconnected From Mongo"))
+.on("error", (error) => console.log(error))
+
+/////////////////////////////////////////
+// Our Model
+/////////////////////////////////////////
+const {Schema, model} = mongoose
+
+const logSchema = new Schema({
+    name: String,
+    weight: Number,
+    noteToSelf: String,
+})
+
+const Log = model("Log", logSchema)
+///////////////////////////////////////////////////////////////////////
+
+//create app object 
+const app = express();
 
 //___________________
 //Middleware
 //___________________
+
+app.use(morgan("huge"))//logging 
 
 //use public folder for static assets
 app.use(express.static('public'));
@@ -50,9 +72,36 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Routes
 //___________________
 //localhost:3000
-app.get('/' , (req, res) => {
+app.get("/" , (req, res) => {
   res.send('Hello World!');
 });
+
+app.get("/logs/seed", (req,res) =>{
+    //array of starter log 
+    const startLogs = [
+        {name: "Blake", weight: 190, noteToSelf: "I want to be as muscular as Zen and I hate Kombucha"},
+        {name: "Matt", weight: 150, noteToSelf: "I want to be as muscular as Zen and I hate coke...cain"},
+        {name: "Ira", weight: 165, noteToSelf: "I want to be as muscular as Zen and he gives me imposter syndrome"},
+    ]
+
+    //delete all log 
+    Log.deleteMany({}, (err, data) => {
+        Log.create(startLogs, (err,data) =>{
+            res.json(data)
+        })
+    })
+})
+
+///////////////////////////////////////
+//Index Route (Get => /logs)
+///////////////////////////////////
+app.get("/logs", (req,res) => {
+    Log.find({}, (err, logs) => {
+        res.render("logs/index.ejs", {logs})
+    })
+})
+
+
 
 //___________________
 //Listener
