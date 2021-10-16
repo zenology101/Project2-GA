@@ -101,6 +101,22 @@ app.get("/logs", (req,res) => {
     })
 })
 
+/////////////////////////////////
+//new route (Get => /logs/new)
+/////////////////////////////////
+app.get("/logs/new", (req, res) => {
+    res.render("logs/new.ejs")
+})
+
+///////////////////////////////////
+//post route 
+////////////////////////////////////
+app.post("/logs", (req,res) => {
+    Log.create(req.body, (err, log) =>{
+        res.redirect("/logs")
+    })
+})
+
 
 ///////////////////////////////////
 //Show route (Get => /logs/:id)
