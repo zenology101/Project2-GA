@@ -8,7 +8,7 @@ HTML, CSS, JavaScript, JQuery, MongoDB, Mongoose, ExpressJS, nodeJS, Ejs, Git
 <img width="915" alt="Screen Shot 2021-10-16 at 8 11 53 AM" src="https://user-images.githubusercontent.com/88060316/137586779-18e06490-eee5-4a71-bcd6-f63d3d6ffac5.png">
 
 ## Getting Started 
-Deploy App Here: 
+Deploy App Here: https://zen-project2.herokuapp.com/logs
 
 ## Future Enhancements 
 Upgrade UI 
