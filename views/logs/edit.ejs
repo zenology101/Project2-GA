@@ -6,6 +6,7 @@
     <%- include("../partials/header.ejs") %>
 
     <main>
+        <a href="/logs"><button>Home</button></a>
       <div>
         <form action="/logs/<%= log._id %>?_method=PUT" method="post">
           <fieldset>

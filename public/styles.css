@@ -1,0 +1,28 @@
+body{
+    background: #ffdd95;
+    text-align: center;
+    color:black; 
+}
+
+button{
+    background-color: #ccabda;
+}
+
+input{
+    background-color: #ccabda;
+}
+
+.info{
+    background-color:rgb(165, 231, 198);  
+    text-shadow: 1px 1px;
+    /* font-family: "Lucida Handwriting", cursive; */
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    /* color: rgb(165, 231, 198); */
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  
