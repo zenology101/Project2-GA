@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/header.ejs") %>
+
+    <main>
+      <div>
+        <form action="/logs/<%= log._id %>?_method=PUT" method="post">
+          <fieldset>
+            <legend>Edit <%= log.name %> </legend>
+            <label>
+              Name:
+              <input type="text" name="name" placeholder="Enter name" 
+              value="<%= log.name %> "/>
+            </label>
+            <label>
+              Weight:
+              <input type="text" name="weight" placeholder="Enter weight" 
+              value="<%= log.weight %> "/>
+            </label>
+            <label>
+              Note to Self:
+              <input type="text" name="noteToSelf" placeholder="Write a motivational note to yourself"
+              value="<%= log.noteToSelf %> "/>
+            </label>
+            <input type="submit" value="UPDATE LOG"/>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

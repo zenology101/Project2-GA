@@ -109,7 +109,7 @@ app.get("/logs/new", (req, res) => {
 })
 
 ///////////////////////////////////
-//post route 
+//Post route 
 ////////////////////////////////////
 app.post("/logs", (req,res) => {
     Log.create(req.body, (err, log) =>{
@@ -117,6 +117,36 @@ app.post("/logs", (req,res) => {
     })
 })
 
+////////////////////////////////
+//Edit route (Get => /logs/:id/edit)
+////////////////////////////////
+app.get("/logs/:id/edit", (req,res) => {
+    const id = req.params.id
+    Log.findById(id, (err,log) => {
+        res.render("logs/edit.ejs", {log})
+    })
+})
+
+
+///////////////////////////////////////
+//Update route (PUT => /logs/:id)
+/////////////////////////////////////////
+app.put("/logs/:id", (req,res) => {
+    const id = req.params.id
+    Log.findByIdAndUpdate(id, req.body, {new:true}, (err, log) => {
+        res.redirect("/logs")
+    }) 
+})
+
+///////////////////////////////
+//Destroy route 
+//////////////////////////////
+app.delete("/logs/:id", (req,res) => {
+    const id = req.params.id
+    Log.findByIdAndRemove(id, (err, log) => {
+        res.redirect("/logs")
+    })
+})
 
 ///////////////////////////////////
 //Show route (Get => /logs/:id)
@@ -130,7 +160,6 @@ app.get("/logs/:id", (req,res) => {
     })
 
 })
-
 
 
 
